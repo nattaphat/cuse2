@@ -1,0 +1,5 @@
+# Nmap 6.25 scan initiated Fri Oct 11 18:15:08 2013 as: nmap -f -sS -v -oA dvwa -A -p 3306 203.146.251.65
+# Ports scanned: TCP(1;3306) UDP(0;) SCTP(0;) PROTOCOLS(0;)
+Host: 203.146.251.65 ()	Status: Up
+Host: 203.146.251.65 ()	Ports: 3306/open/tcp//mysql/MySQL 5.1.61/
+# Nmap done at Fri Oct 11 18:15:24 2013 -- 1 IP address (1 host up) scanned in 18.31 seconds

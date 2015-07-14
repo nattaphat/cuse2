@@ -1,0 +1,63 @@
+1.To create the migrations table, run the following command from Terminal:
+	$ php artisan migrate:install
+
+2.Creating a Migration- we need to create a migration to create the users table.	
+	$ php artisan generate:migration create_users_table --fields="email:string, password:string"
+
+	Now if you look under the app/database/migrations directory, 
+	you should see the new timestamped Migration file
+
+3.If you run the migrate command now from the Terminal, Laravel will create the users table for you:
+	$ php artisan migrate
+
+4.Adding a column with a Migration-For example, we also want our users to have a username.
+	To add this column, you would simply run this command in Terminal:
+	$ php artisan generate:migration add_username_to_users_table --fields="username:string"
+
+5.Again, run the migrate command from Terminal to add the username column to the users table.
+	$ php artisan migrate
+
+-----------------------------------------------------------------
+Laravel-4-Generators
+https://github.com/JeffreyWay/Laravel-4-Generators#migrations
+1. Create table
+	--fields="first:string, last:string"
+	--fields="age:integer, yob:date"
+	--fields="username:string:unique, age:integer:nullable"
+	--fields="name:string:default('John'), email:string:unique:nullable"
+	--fields="username:string[30]:unique, age:integer:nullable"
+
+	$ php artisan generate:migration create_ministry_table --fields="full_name:string[256]:unique, short_name:string[256]"
+
+2. Alter table
+	$ php artisan generate:migration add_user_id_to_posts_table
+
+	Schema::create('department',function($table){
+			$table->increments('dep_id')->primary();
+			$table->string('tname',256)->unique()->nullable(false);
+			$table->string('ename',256)->nullable();
+			$table->string('code',15)->nullable();
+			$table->integer('ministry_id',256)->nullable(false);
+			$table->timestamps();
+		});
+	}
+
+			$table->increments('id')->primary();
+			$table->string('full_name',256)->unique()->nullable(false);
+			$table->string('short_name',256)->nullable();
+			$table->timestamps();
+
+3.Run command to create real table
+	$ php artisan migrate
+
+-----------------------------------------------------------------
+DB Seed
+$ php artisan db:seed
+
+-----------------------------------------------------------------
+Password reminder
+1.create migration for reset password
+$ php artisan auth:reminders
+
+2.create table 
+$ php artisan migrate

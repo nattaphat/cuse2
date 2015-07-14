@@ -1,0 +1,20 @@
+{
+  "name": "bower.json",
+  "version": "0.0.1",
+  "authors": [
+    "Nattaphat K.@home <nattaphat@gmail.com>"
+  ],
+  "description": "for thesis project",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "CUSE"
+  ],
+  "license": "MIT",
+  "homepage": "localhost/project/sites",
+  "dependencies": {
+    "notifyjs": "~0.3.2",
+    "bootstrap-fileinput": "~4.2.3"
+  }
+}

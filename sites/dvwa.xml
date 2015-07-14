@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="file:///usr/local/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 6.25 scan initiated Fri Oct 11 18:15:08 2013 as: nmap -f -sS -v -oA dvwa -A -p 3306 203.146.251.65 -->
+<nmaprun scanner="nmap" args="nmap -f -sS -v -oA dvwa -A -p 3306 203.146.251.65" start="1381490108" startstr="Fri Oct 11 18:15:08 2013" version="6.25" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="1" services="3306"/>
+<verbose level="1"/>
+<debugging level="0"/>
+<taskbegin task="Ping Scan" time="1381490109"/>
+<taskend task="Ping Scan" time="1381490109" extrainfo="1 total hosts"/>
+<taskbegin task="Parallel DNS resolution of 1 host." time="1381490109"/>
+<taskend task="Parallel DNS resolution of 1 host." time="1381490109"/>
+<taskbegin task="SYN Stealth Scan" time="1381490109"/>
+<taskend task="SYN Stealth Scan" time="1381490109" extrainfo="1 total ports"/>
+<taskbegin task="Service scan" time="1381490109"/>
+<taskend task="Service scan" time="1381490109" extrainfo="1 service on 1 host"/>
+<taskbegin task="Traceroute" time="1381490117"/>
+<taskend task="Traceroute" time="1381490120"/>
+<taskbegin task="Parallel DNS resolution of 12 hosts." time="1381490120"/>
+<taskend task="Parallel DNS resolution of 12 hosts." time="1381490124"/>
+<taskbegin task="NSE" time="1381490124"/>
+<taskend task="NSE" time="1381490124"/>
+<host starttime="1381490109" endtime="1381490124"><status state="up" reason="echo-reply" reason_ttl="51"/>
+<address addr="203.146.251.65" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="3306"><state state="open" reason="syn-ack" reason_ttl="51"/><service name="mysql" product="MySQL" version="5.1.61" method="probed" conf="10"><cpe>cpe:/a:mysql:mysql:5.1.61</cpe></service><script id="mysql-info" output="Protocol: 10&#xa;Version: 5.1.61&#xa;Thread ID: 196067870&#xa;Some Capabilities: Long Passwords, Connect with DB, Compress, ODBC, Transactions, Secure Connection&#xa;Status: Autocommit&#xa;Salt: \iyH8}1x+hN.8oFPA3{3&#xa;"/></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="3306"/>
+</os>
+<distance value="13"/>
+<trace port="3306" proto="tcp">
+<hop ttl="1" ipaddr="192.168.182.1" rtt="8.76"/>
+<hop ttl="2" ipaddr="192.168.0.1" rtt="10.57" host="system.clarkconnect.lan"/>
+<hop ttl="3" ipaddr="192.168.1.1" rtt="13.52"/>
+<hop ttl="4" ipaddr="10.169.222.174" rtt="39.38"/>
+<hop ttl="5" ipaddr="10.169.222.233" rtt="42.73"/>
+<hop ttl="6" ipaddr="61.91.29.13" rtt="39.63" host="61-91-29-13.static.asianet.co.th"/>
+<hop ttl="7" ipaddr="203.144.193.93" rtt="38.60" host="203-144-193-93.static.asianet.co.th"/>
+<hop ttl="8" ipaddr="122.144.31.137" rtt="38.84" host="TIG-Net31-137.trueintergateway.com"/>
+<hop ttl="9" ipaddr="122.144.31.118" rtt="36.80" host="TIG-Net31-118.trueintergateway.com"/>
+<hop ttl="10" ipaddr="203.170.173.14" rtt="42.53" host="te-5-4-cbw33.d-idc.csloxinfo.net"/>
+<hop ttl="11" ipaddr="203.146.101.42" rtt="33.49"/>
+<hop ttl="13" ipaddr="203.146.251.65" rtt="30.24"/>
+</trace>
+<times srtt="30297" rttvar="2472" to="100000"/>
+</host>
+<runstats><finished time="1381490124" timestr="Fri Oct 11 18:15:24 2013" elapsed="18.31" summary="Nmap done at Fri Oct 11 18:15:24 2013; 1 IP address (1 host up) scanned in 18.31 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

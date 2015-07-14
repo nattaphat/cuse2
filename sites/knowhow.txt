@@ -1,0 +1,233 @@
+1.To create the migrations table, run the following command from Terminal:
+	$ php artisan migrate:install
+
+2.Creating a Migration- we need to create a migration to create the users table.	
+	$ php artisan generate:migration create_users_table --fields="email:string, password:string"
+
+	Now if you look under the app/database/migrations directory, 
+	you should see the new timestamped Migration file
+
+3.If you run the migrate command now from the Terminal, Laravel will create the users table for you:
+	$ php artisan migrate
+
+4.Adding a column with a Migration-For example, we also want our users to have a username.
+	To add this column, you would simply run this command in Terminal:
+	$ php artisan generate:migration add_username_to_users_table --fields="username:string"
+
+5.Again, run the migrate command from Terminal to add the username column to the users table.
+	$ php artisan migrate
+
+-----------------------------------------------------------------
+Laravel-4-Generators
+https://github.com/JeffreyWay/Laravel-4-Generators#migrations
+1. Create table
+	--fields="first:string, last:string"
+	--fields="age:integer, yob:date"
+	--fields="username:string:unique, age:integer:nullable"
+	--fields="name:string:default('John'), email:string:unique:nullable"
+	--fields="username:string[30]:unique, age:integer:nullable"
+
+	$ php artisan generate:migration create_ministry_table --fields="full_name:string[256]:unique, short_name:string[256]"
+
+2. Alter table
+	$ php artisan generate:migration add_user_id_to_posts_table
+
+	Schema::create('department',function($table){
+			$table->increments('dep_id')->primary();
+			$table->string('tname',256)->unique()->nullable(false);
+			$table->string('ename',256)->nullable();
+			$table->string('code',15)->nullable();
+			$table->integer('ministry_id',256)->nullable(false);
+			$table->timestamps();
+		});
+	}
+
+			$table->increments('id')->primary();
+			$table->string('full_name',256)->unique()->nullable(false);
+			$table->string('short_name',256)->nullable();
+			$table->timestamps();
+
+3.Run command to create real table
+	$ php artisan migrate
+
+-----------------------------------------------------------------
+DB Seed
+$ php artisan db:seed
+
+-----------------------------------------------------------------
+Relational model 
+
+- One To One (a User model might have one Phone)
+	
+	class User extends Eloquent {
+
+	    public function phone()
+	    {
+	        return $this->hasOne('Phone');
+	    }
+
+	}
+	//The first argument passed to the hasOne method is the name of the related model
+	//retrieve
+
+	$phone = User::find(1)->phone;
+
+	//The SQL performed by this statement will be as follows
+
+	select * from users where id = 1
+	select * from phones where user_id = 1
+
+	//Take note that Eloquent assumes the foreign key of the relationship based on the model name. 
+	In this case, Phone model is assumed to use a user_id foreign key. If you wish to override this convention, 
+	you may pass a second argument to the hasOne method
+
+	return $this->hasOne('Phone', 'custom_key');
+
+	//To define the inverse of the relationship on the Phone model, we use the belongsTo method:
+	class Phone extends Eloquent {
+
+	    public function user()
+	    {
+	        return $this->belongsTo('User');
+	    }
+
+	}
+
+	//In the example above, Eloquent will look for a user_id column on the phones table. 
+	//If you would like to define a different foreign key column, you may pass it as the second argument to the belongsTo method:
+	class Phone extends Eloquent {
+
+	    public function user()
+	    {
+	        return $this->belongsTo('User', 'custom_key');
+	    }
+	}
+
+- One To Many
+	//An example of a one-to-many relation is a blog post that "has many" comments. We can model this relation like so
+	class Post extends Eloquent {
+
+	    public function comments()
+	    {
+	        return $this->hasMany('Comment');
+	    }
+
+	}
+	//Now we can access the post's comments through the dynamic property:
+
+	$comments = Post::find(1)->comments;
+
+	//If you need to add further constraints to which comments are retrieved, you may call the comments method and continue chaining conditions:
+
+	$comments = Post::find(1)->comments()->where('title', '=', 'foo')->first();
+
+	//Again, you may override the conventional foreign key by passing a second argument to the hasMany method:
+
+	return $this->hasMany('Comment', 'custom_key');
+
+	//To define the inverse of the relationship on the Comment model, we use the belongsTo method:
+	class Comment extends Eloquent {
+
+	    public function post()
+	    {
+	        return $this->belongsTo('Post');
+	    }
+
+	}
+
+- Many To Many
+	//Many-to-many relations are a more complicated relationship type. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". Three database tables are needed for this relationship: users, roles, and role_user. The role_user table is derived from the alphabetical order of the related model names, and should have user_id and role_id columns.
+
+	//We can define a many-to-many relation using the belongsToMany method:
+	class User extends Eloquent {
+
+	    public function roles()
+	    {
+	        return $this->belongsToMany('Role');
+	    }
+
+	}
+
+	//Now, we can retrieve the roles through the User model:
+
+	$roles = User::find(1)->roles;
+
+	//If you would like to use an unconventional table name for your pivot table, you may pass it as the second argument to the belongsToMany method:
+
+	return $this->belongsToMany('Role', 'user_roles');
+
+	//You may also override the conventional associated keys:
+
+	return $this->belongsToMany('Role', 'user_roles', 'user_id', 'foo_id');
+
+	//Of course, you may also define the inverse of the relationship on the Role model:
+
+	class Role extends Eloquent {
+
+	    public function users()
+	    {
+	        return $this->belongsToMany('User');
+	    }
+
+	}
+
+-----------------------------------------------------------------
+Database Seeding
+
+//role.php
+return array(
+        'table' => 'roles',       # name of the table
+        array('name' => 'admin'),
+        array('name' => 'user'),
+        array('name' => 'moderator'),
+);
+
+//users.php
+$admin_role = DB::table('roles')
+                                ->select('id')
+                                ->where('name', 'admin')
+                                ->first()
+                                ->id;
+$user_role = DB::table('roles')
+                                ->select('id')
+                                ->where('name', 'user')
+                                ->first()
+                                ->id;
+$mod_role  = DB::table('roles')
+                                ->select('id')
+                                ->where('name', 'moderator')
+                                ->first()
+                                ->id;
+
+$now = date('Y-m-d H:i:s');
+
+return array(
+        'table' => 'users',
+
+        array(
+                'username'   => 'max',
+                'password'   => Hash::make('test'),
+                'created_at' => $now,
+                'updated_at' => $now,
+                'role_id'    => $admin_role
+        ),
+        
+        array(
+                'username'   => 'john',
+                'password'   => Hash::make('test'),
+                'created_at' => $now,
+                'updated_at' => $now,
+                'role_id'    => $mod_role          
+        ),
+
+        array(
+                'username'   => 'mary',
+                'password'   => Hash::make('test'),
+                'created_at' => $now,
+                'updated_at' => $now,
+                'role_id'    => $user_role
+        ),
+
+);
+
+$ php artisan db:seed

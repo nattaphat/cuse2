@@ -1,0 +1,33 @@
+# Nmap 6.25 scan initiated Fri Oct 11 18:15:08 2013 as: nmap -f -sS -v -oA dvwa -A -p 3306 203.146.251.65
+Nmap scan report for 203.146.251.65
+Host is up (0.030s latency).
+PORT     STATE SERVICE VERSION
+3306/tcp open  mysql   MySQL 5.1.61
+| mysql-info: Protocol: 10
+| Version: 5.1.61
+| Thread ID: 196067870
+| Some Capabilities: Long Passwords, Connect with DB, Compress, ODBC, Transactions, Secure Connection
+| Status: Autocommit
+|_Salt: \iyH8}1x+hN.8oFPA3{3
+Too many fingerprints match this host to give specific OS details
+Network Distance: 13 hops
+
+TRACEROUTE (using port 3306/tcp)
+HOP RTT      ADDRESS
+1   8.76 ms  192.168.182.1
+2   10.57 ms system.clarkconnect.lan (192.168.0.1)
+3   13.52 ms 192.168.1.1
+4   39.38 ms 10.169.222.174
+5   42.73 ms 10.169.222.233
+6   39.63 ms 61-91-29-13.static.asianet.co.th (61.91.29.13)
+7   38.60 ms 203-144-193-93.static.asianet.co.th (203.144.193.93)
+8   38.84 ms TIG-Net31-137.trueintergateway.com (122.144.31.137)
+9   36.80 ms TIG-Net31-118.trueintergateway.com (122.144.31.118)
+10  42.53 ms te-5-4-cbw33.d-idc.csloxinfo.net (203.170.173.14)
+11  33.49 ms 203.146.101.42
+12  ...
+13  30.24 ms 203.146.251.65
+
+Read data files from: /usr/local/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+# Nmap done at Fri Oct 11 18:15:24 2013 -- 1 IP address (1 host up) scanned in 18.31 seconds

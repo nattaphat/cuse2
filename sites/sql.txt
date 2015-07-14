@@ -1,0 +1,151 @@
+//view all agency 
+
+select distinct 
+	u.id as user_id,
+	u.agency_id,
+	ru.role_id,
+	dpl.policy_id,
+	rd.period,
+	d.id as data_id,
+	d.data_name,
+	d.table_name,
+	ap.action_id,
+	dp.status as data_privacy_status,
+	dp.id,
+	p.policy_content,
+	dp.agency_id as privacy_agency_id,
+	ag.code as agency_code
+from usernhc u 
+inner join role_user ru on(u.id = ru.user_id)
+inner join role_policy rp on (ru.role_id=rp.role_id)
+inner join data_policy dpl on (rp.policy_id = dpl.policy_id)
+inner join policy p on (p.id = dpl.policy_id)
+inner join data_privacy dp on (dp.data_id = dpl.policy_id)
+inner join data d on (dp.data_id = d.id)
+inner join action_policy ap on (rp.policy_id = ap.policy_id)
+inner join condition_policy cp on (rp.policy_id = cp.policy_id)
+inner join retain_data rd on (rd.data_id = dp.data_id)
+inner join agency ag on (ag.id = dp.agency_id)
+where ru.user_id = 2 and d.id = 1 and dp.status = true 
+order by dp.id
+
+
+
+
+//Below is fectch data only own agency// 
+
+select distinct u.id as user_id,u.agency_id,ru.role_id,dpl.policy_id,rd.period,d.id as data_id,d.data_name,d.table_name,ap.action_id,dp.status as data_privacy_status,dp.id,p.policy_content,dp.agency_id as privacy_agency_id,ag.code as agency_code
+from usernhc u 
+inner join role_user ru on(u.id = ru.user_id)
+inner join role_policy rp on (ru.role_id=rp.role_id)
+inner join data_policy dpl on (rp.policy_id = dpl.policy_id)
+inner join policy p on (p.id = dpl.policy_id)
+inner join data_privacy dp on (dp.data_id = dpl.policy_id)
+inner join data d on (dp.data_id = d.id)
+inner join action_policy ap on (rp.policy_id = ap.policy_id)
+inner join condition_policy cp on (rp.policy_id = cp.policy_id)
+inner join retain_data rd on (rd.data_id = dp.data_id)
+inner join agency ag on (ag.id = dp.agency_id)
+where ru.user_id = 2 and d.id = 1 and dp.status = true and dp.agency_id = 4
+order by dp.id
+
+
+
+
+
+
+
+
+
+
+
+select distinct 
+	"usernhc"."id" as "userid", 
+	"usernhc"."agency_id", 
+	"role_user"."role_id", 
+	"data_policy"."policy_id", 
+	"retain_data"."period", 
+	"data"."id" as "dataid", 
+	"data"."data_name", 
+	"data"."table_name", 
+	"action_policy"."action_id", 
+	"data_privacy"."status" as "data_privacy_status", 
+	"data_privacy"."id", 
+	"policy"."policy_content", 
+	"data_privacy"."agency_id" as "privacy_agency_id", 
+	"agency"."code" as "agency_code" 
+from 
+	"usernhc" 
+	inner join "role_user" on "usernhc"."id" = "role_user"."user_id" 
+	inner join "role_policy" on "role_user"."role_id" = "role_policy"."role_id" 
+	inner join "data_policy" on "role_policy"."policy_id" = "data_policy"."policy_id" 
+	inner join "policy" on "policy"."id" = "data_policy"."policy_id" 
+	inner join "data_privacy" on "data_privacy"."data_id" = "data_policy"."policy_id" 
+	inner join "data" on "data"."id" = "data_privacy"."data_id" 
+	inner join "action_policy" on "role_policy"."policy_id" = "action_policy"."policy_id" 
+	inner join "condition_policy" on "role_policy"."policy_id" = "condition_policy"."policy_id" 
+	inner join "retain_data" on "retain_data"."data_id" = "data_privacy"."data_id" 
+	inner join "agency" on "agency"."id" = "data_privacy"."agency_id" 
+where 
+	"usernhc"."id" = 1
+	and "data_privacy"."status" = true 
+order by "data_privacy"."id" asc
+
+
+V.2
+
+ SELECT DISTINCT 
+	 	data_privacy.agency_id, 
+	 	agency.tname AS agency_name, 
+	 	agency.code AS agency_code, 
+	 	data_privacy.status AS dataprivacy_status, 
+	 	usernhc.id AS user_id, data_privacy.data_id, 
+	 	data.data_name, 
+	 	data.table_name, 
+	 	retain_data.period, 
+	 	role_user.role_id, 
+	 	role.role_name, 
+	 	action_policy.action_id, 
+	 	action.action_name, 
+	 	action.action, 
+	 	condition_policy.cond_id, 
+	 	condition.cond_name, 
+	 	data_policy.policy_id, 
+	 	policy.status AS policy_status
+
+   FROM data_privacy
+	   JOIN data_policy ON data_policy.data_id = data_privacy.data_id
+	   JOIN data ON data.id = data_policy.data_id
+	   JOIN policy ON policy.id = data_policy.data_id
+	   JOIN usernhc ON usernhc.agency_id = data_privacy.agency_id
+	   JOIN agency ON usernhc.agency_id = agency.id
+	   JOIN role_user ON role_user.user_id = usernhc.id
+	   JOIN role ON role_user.role_id = role.id
+	   JOIN action_policy ON data_policy.policy_id = action_policy.policy_id
+	   JOIN action ON action_policy.action_id = action.id
+	   JOIN condition_policy ON condition_policy.policy_id = data_policy.policy_id
+	   JOIN condition ON condition_policy.cond_id = condition.id
+	   JOIN retain_data ON retain_data.data_id = data_privacy.data_id AND data_privacy.status = true
+  WHERE data_privacy.status AND policy.status
+  ORDER BY data_privacy.data_id, action_policy.action_id;
+
+
+V.3-v_querydata_metadata_v3
+
+  SELECT DISTINCT data_privacy.data_id, data.data_name, data_policy.policy_id, usernhc.id AS user_id, usergroup.id AS user_grp, agency.id AS agency_id, role_user.id AS role_id, role.role_name, action_policy.action_id, action.action_name, action.action, condition.cond_name, condition_policy.cond_id, retain_data.period, policy.status AS policy_status, data_privacy.status AS data_privacy_status, agency.code
+   FROM data_privacy
+   JOIN data_policy ON data_policy.data_id = data_privacy.data_id
+   JOIN data ON data.id = data_policy.data_id
+   JOIN policy ON policy.id = data_policy.policy_id
+   JOIN usernhc ON usernhc.agency_id = data_privacy.agency_id
+   JOIN usergroup ON usernhc.grp_id = usergroup.id
+   JOIN agency ON usernhc.agency_id = agency.id
+   JOIN role_user ON role_user.user_id = usernhc.id
+   JOIN role ON role_user.role_id = role.id
+   JOIN action_policy ON data_policy.policy_id = action_policy.policy_id
+   JOIN action ON action_policy.action_id = action.id
+   JOIN condition_policy ON condition_policy.policy_id = data_policy.policy_id
+   JOIN condition ON condition_policy.cond_id = condition.id
+   JOIN retain_data ON retain_data.data_id = data_privacy.data_id
+  WHERE usergroup.id <> 1
+  ORDER BY data_privacy.data_id;

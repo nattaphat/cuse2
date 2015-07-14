@@ -1,0 +1,31 @@
+  <!-- Table -->
+  <table id="result_search_role" class="table table-hover table-bordered">
+    <thead>
+      <tr class="active">
+        <th class="text-center">รหัส</th>
+        <th class="text-center">ชื่อบทบาท</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody><?php $item = $paginator->getFrom() ?>
+    @if(count($paginator) >=1)
+      @foreach ($paginator as $role)
+          <tr>
+            <td class="col-md-1 text-center">
+               {{ $item++ }}
+            </td>
+            <td class="col-md-6 text-left">
+              {{ $role->role_name }}
+            </td>
+            <td class="col-md-2 text-center">
+              <a href="{{ URL::to('role-edit' ) }}/{{ $role->id }}" class="btn btn-info btn">แก้ไข</a>
+              <a href="{{ URL::to('role-del' ) }}/{{ $role->id }}" class="btn btn-danger btn" onclick="return confirm('ท่านต้องการลบทิ้งชื่อบทบาทนี้ใช่หรือไม่ ?')">ลบทิ้ง</a>
+            </td>
+          </tr>
+      @endforeach
+    @else
+    No result.
+    @endif
+    </tbody>
+  </table>
+</div>
