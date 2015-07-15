@@ -19,7 +19,7 @@
                       <div class="panel-heading">เอกสารเผยแพร่คลังสารสนเทศกลาง</div>
                       <div class="panel-body">
                         <p>
-                          อธิบายคำศัพท์ นิยามคำ ที่ใช้งานในคลังสารสนเทศกลาง
+                          {{--อธิบายคำศัพท์ นิยามคำ ที่ใช้งานในคลังสารสนเทศกลาง--}}
                         </p>
                       </div>
                       <!-- Table -->
@@ -32,61 +32,28 @@
                           </tr>
                         </thead>
                         <tbody>
+                            @foreach( $rs as $key => $val)
                               <tr >
                                 <td class="col-md-1 text-center">
-                                    1.
+                                    {{
+                                        Form::checkbox(
+                                            '$val->eng_name',
+                                            'value',
+                                            false,[
+                                                "id"=>"$val->eng_name"
+                                            ])
+                                    }}
                                 </td>
-                                <td class="col-md-4 text-left">
-                                    ข้อมูลรายชั่วโมง
+                                <td class="col-md-5 text-left">
+                                    ความมุ่งมั่นที่แสดงให้เห็นว่าได้รับความร่วมมือจากกลุ่มผู้ใช้งานและมีส่วนได้เสีย
                                 </td>
-                                <td class="col-md-7 text-left">
-                                    ผลรวมค่าของข้อมูลที่ในช่วงเวลาหนึ่งชั่วโมง
+                                <td class="col-md-6 text-center">
+                                    <a href="{{ URL::route('proac_commmitupload') }}/{{$val->id}}" class="btn btn-info cls_{{$val->eng_name}}">
+                                        อัพโหลดเอกสาร
+                                    </a>
                                 </td>
                               </tr>
-                              {{--<tr >--}}
-                                {{--<td class="col-md-1 text-center">--}}
-                                    {{--2.--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-4 text-left">--}}
-                                    {{--ข้อมูล 24 ชั่วโมง--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-7 text-left">--}}
-                                    {{--ผลรวมค่าของข้อมูลนับตั้งแต่ข้อมูลชั่วโมงล่าสุดย้อนหลังไป 24 ชั่วโมง--}}
-                                {{--</td>--}}
-                              {{--</tr>--}}
-                            {{--<tr >--}}
-                                {{--<td class="col-md-1 text-center">--}}
-                                    {{--3.--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-4 text-left">--}}
-                                    {{--ข้อมูลวานนี้--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-7 text-left">--}}
-                                    {{--ผลรวมค่าข้อมูลตั้งแต่เวลา 7.00 น. ของวันก่อนหน้าถึงเวลา 7.00 น. วันปัจจุบัน--}}
-                                {{--</td>--}}
-                              {{--</tr>--}}
-                            {{--<tr >--}}
-                                {{--<td class="col-md-1 text-center">--}}
-                                    {{--4.--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-4 text-left">--}}
-                                    {{--ข้อมูลวันนี้--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-7 text-left">--}}
-                                    {{--ผลรวมค่าข้อมูลตั้งแต่เวลา 7.00 น. วันปัจจุบันจนถึงเวลาปัจจุบัน--}}
-                                {{--</td>--}}
-                              {{--</tr>--}}
-                            {{--<tr >--}}
-                                {{--<td class="col-md-1 text-center">--}}
-                                    {{--5.--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-4 text-left">--}}
-                                    {{--ข้อมูล 7 วันย้อนหลัง--}}
-                                {{--</td>--}}
-                                {{--<td class="col-md-7 text-left">--}}
-                                    {{--ผลรวมค่าข้อมูลตั้งแต่เวลาปัจจุบันย้อนหลังไป 168 ชั่วโมง--}}
-                                {{--</td>--}}
-                              {{--</tr>--}}
+                            @endforeach
                         </tbody>
                       </table>
                     </div>

@@ -934,6 +934,29 @@ $(document).ready(function()
             "maxFileSize":10240,//10MB
             "maxFileCount":5
         });
+
+
+      $("#proactive_commitment").fileinput({
+          "allowedFileExtensions":["pdf","txt"],
+          "maxFileSize":10240,//10MB
+          "maxFileCount":5,
+          //"allowedPreviewTypes":["html"]
+          //"uploadUrl": "http://localhost/file-upload-single/1", // server upload action
+          //"uploadAsync": true
+      });
+
+          function disableUpload(id_chk,id_upload){
+              $("."+id_upload).addClass('disabled');
+              $("#"+id_chk).click(function(){
+                  if( $("#"+id_chk).is(':checked')){
+                      $("."+id_upload).removeClass('disabled');
+                  }else{
+                      $("."+id_upload).addClass('disabled');
+                  }
+              });addClass
+          }
+
+          disableUpload("proactive_commitment","cls_proactive_commitment");
         // $(".btn_add_agency_data").click(function(event){
         //  event.preventDefault();
         // var str = $( "#add_agency_data" ).serialize();

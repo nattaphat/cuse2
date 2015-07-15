@@ -926,7 +926,7 @@ Route::get('/training/num', array(
 	'uses' => 'TrainingController@numCourse'
 ));
 
-Route::get('/training/report/{id}', array(
+Route::get('/training/report/{id?}', array(
 	'before'=>'auth',
 	'as' => 'trining_report',
 	'uses' => 'TrainingController@getReport'
@@ -992,6 +992,12 @@ Route::get('/other', array(
 	'before'=>'auth_superadmin',
 	'as' => 'other',
 	'uses' => 'OtherController@checklist'
+));
+
+Route::get('/other/proactive/commitment/{id?}', array(
+	'before'=>'auth_superadmin',
+	'as' => 'proac_commmitupload',
+	'uses' => 'OtherController@proactiveCommitUpload'
 ));
 
 //PDF Example download
