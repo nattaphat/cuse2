@@ -988,16 +988,40 @@ Route::get('glossary', array(
 ));
 
 //Other
+//list checklist
 Route::get('/other', array(
 	'before'=>'auth_superadmin',
 	'as' => 'other',
 	'uses' => 'OtherController@checklist'
 ));
 
+//upload checklist doucment
 Route::get('/other/proactive/commitment/{id?}', array(
 	'before'=>'auth_superadmin',
 	'as' => 'proac_commmitupload',
 	'uses' => 'OtherController@proactiveCommitUpload'
+));
+
+//save checklist upload file
+Route::post('/other/proactive/commitment/upload', array(
+    'before'=>'auth_superadmin',
+    'as' => 'proac_commmitupload_save',
+    'uses' => 'OtherController@proactiveCommitUploadSave'
+));
+
+//edit upload checklist doucment
+Route::post('/other/proactive/commitment/docstatus/edit', array(
+    'before'=>'auth_superadmin',
+    'as' => 'proac_commmitupload_edit',
+    'uses' => 'OtherController@proactiveCommitEditDocstatus'
+));
+
+
+//list public doucment
+Route::get('publicdoc', array(
+    'before'=>'auth',
+    'as' => 'publicdoc',
+    'uses' => 'OtherController@publicdoc'
 ));
 
 //PDF Example download

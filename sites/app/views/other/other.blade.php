@@ -26,7 +26,7 @@
                       <table id="result_search_policy"  class="table table-hover table-bordered">
                         <thead>
                           <tr class="active">
-                            <th class="text-center">ลำดับ</th>
+                            <th class="text-center">#</th>
                             <th class="text-center">รายการ</th>
                             <th class="text-center">อัพโหลดไฟล์เอกสาร</th>
                           </tr>
@@ -35,14 +35,7 @@
                             @foreach( $rs as $key => $val)
                               <tr >
                                 <td class="col-md-1 text-center">
-                                    {{
-                                        Form::checkbox(
-                                            '$val->eng_name',
-                                            'value',
-                                            false,[
-                                                "id"=>"$val->eng_name"
-                                            ])
-                                    }}
+                                    <input type="checkbox" class="" id="chkbx_{{$val->eng_name}}" name="chkbx_{{$val->eng_name}}">
                                 </td>
                                 <td class="col-md-5 text-left">
                                     ความมุ่งมั่นที่แสดงให้เห็นว่าได้รับความร่วมมือจากกลุ่มผู้ใช้งานและมีส่วนได้เสีย

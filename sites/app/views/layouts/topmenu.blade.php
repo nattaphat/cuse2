@@ -120,7 +120,7 @@
                     <li><a href="{{ URL::to('training/course/report') }}"><i class="icon-fixed-width icon-tag"></i> ออกรายงาน-ชื่อหลักสูตร</a></li>
                 </ul>
             </li>
-            <li {{ (Request::is('other') ? 'class="active"' : '') }}><a href="{{ URL::to('other') }}" title="อื่นๆ"><i class="icon-list"></i> อื่นๆ</a></li>
+            <li {{ (Request::is('other') ? 'class="active"' : '') }}><a href="{{ URL::to('other') }}" title="เอกสาร"><i class="icon-list"></i> เอกสาร</a></li>
         @endif
         </ul>
 
@@ -173,6 +173,7 @@
                         <li><a href="{{ URL::to('help') }}"><i class="icon-fixed-width icon-question"></i> การใช้งานระบบ</a></li>
                         <li><a href="{{ URL::to('functional') }}"><i class="icon-fixed-width icon-question"></i> ฟังก์ชันงานในระบบ</a></li>
                         <li><a href="{{ URL::to('glossary') }}"><i class="icon-fixed-width icon-info"></i> อภิธานศัพท์</a></li>
+                        <li><a href="{{ URL::to('publicdoc') }}"><i class="icon-fixed-width icon-bookmark"></i> เอกสารเผยแพร่</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ URL::to('logout') }}"><i class="icon-fixed-width icon-signout"></i> ออกจากระบบ</a></li>
                     </ul>
