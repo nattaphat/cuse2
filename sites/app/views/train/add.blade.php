@@ -17,7 +17,8 @@
   "route" => array("trining_save",""),
   "id"=>"form-training-adding",
   "autocomplete" => "off",
-  "class"=>"form-horizontal"
+  "class"=>"form-horizontal",
+  "files"=>true
 ])}}
     
   <div class="form-group">
@@ -59,16 +60,25 @@
     @endforeach
   </div>
 
-<div class="form-group">
-  <label for="inputPassword1" class="col-lg-4 control-label">สถานะหลักสูตร*</label>
+ <div class="form-group">
+    <label for="inputPassword1" class="col-lg-4 control-label">สถานะหลักสูตร*</label>
     <div class=" col-lg-8">
-      <div class="make-switch"  data-on="success" data-off="warning" data-on-label="เปิด" data-off-label="ปิด">
-        <input type="checkbox" name="status" checked="checked">
+        <div class="make-switch"  data-on="success" data-off="warning" data-on-label="เปิด" data-off-label="ปิด">
+            <input type="checkbox" name="status" checked="checked">
+        </div>
     </div>
+ </div>
 
+ <div class="form-group">
+        <label for="inputPassword1" class="col-lg-4 control-label">เอกสารแนบ</label>
+        <div class=" col-lg-8">
+            {{
+            Form::file('training_upload[]',["multiple"=>"true","id"=>"training_upload"]);
+            }}
+            {{--<input id="training_upload" type="file" multiple="true">--}}
 
-    </div>
-  </div>
+        </div>
+ </div>
 
 <div class="form-group">
       <label for="inputEmail1" class="col-lg-4 control-label">ระยะเวลา ตั้งแต่-ถึง*</label>

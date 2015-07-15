@@ -567,6 +567,12 @@ Route::get('/user/account/security/{id}', array(
 	'uses' => 'UsernhcController@userSecurityFrm'
 ));
 
+Route::get('/user/account/role/{id}', array(
+	'before'=>'auth',
+	'as' => 'user_getrole',
+	'uses' => 'UsernhcController@getRole'
+));
+
 Route::post('/user/account/security/save/{id}', array(
 	'before'=>'auth',
 	'as' => 'usersecuritysave',
@@ -956,7 +962,13 @@ Route::get('/training-search/{keyword?}', array(
 	'uses' => 'TrainingController@searchAction'
 ));
 
-//็Help
+Route::post('/training/download', array(
+	'before'=>'auth',
+	'as' => 'training_download',
+	'uses' => 'TrainingController@downloadFile'
+));
+
+//Help
 Route::get('/help', array(
 	'before'=>'auth',
 	'as' => 'help',
@@ -967,6 +979,19 @@ Route::get('/functional', array(
 	'before'=>'auth',
 	'as' => 'help',
 	'uses' => 'HelpController@functionalDocument'
+));
+
+Route::get('glossary', array(
+	'before'=>'auth',
+	'as' => 'glossary',
+	'uses' => 'HelpController@glossary'
+));
+
+//Other
+Route::get('/other', array(
+	'before'=>'auth_superadmin',
+	'as' => 'other',
+	'uses' => 'OtherController@checklist'
 ));
 
 //PDF Example download

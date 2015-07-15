@@ -5,6 +5,7 @@ composer.phar
 composer.lock
 .DS_Store
 tests/*
+*.iml
 !/app/storage/cache
 !/app/storage/logs
 !/app/storage/meta

@@ -4,7 +4,7 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.1.*",
+		"laravel/framework": "4.2.17",
 		"laravelbook/ardent": "dev-master",
 		"way/generators": "2.*",
 		"way/phpunit-wrappers": "dev-master",
@@ -17,7 +17,7 @@
 		"thujohn/pdf": "dev-master",
 		"maatwebsite/excel": "1.1.*@dev",
 		"nitmedia/wkhtml2pdf": "dev-master",
-		"barryvdh/laravel-dompdf": "dev-master",
+		"barryvdh/laravel-dompdf": "0.4.*",
 		"barryvdh/laravel-debugbar": "1.*",
 		"kmd/logviewer": "1.1.*",
 		"guzzle/guzzle": "3.8.*@dev"

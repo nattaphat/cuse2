@@ -53,7 +53,7 @@
     </thead>
     <tbody>
       <input type="hidden" value="{{ URL::to('/')}}/peer/userprivacy" name="urlusermodal" id="urlusermodal">
-      <input type="hidden" value="{{ URL::to('/')}}/peer/dataprivacy" name="urldatamodal" id="urldatamodal"><? $i=1;?>
+      <input type="hidden" value="{{ URL::to('/')}}/peer/dataprivacy" name="urldatamodal" id="urldatamodal"><?php $i=1;?>
         @foreach ($result as $datainfo)  
             <tr>
               <td class="text-center col-md-1">

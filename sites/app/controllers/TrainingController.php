@@ -24,6 +24,14 @@ class TrainingController extends BaseController {
 	public $dt_start;
 	public $dt_end;
 	public $keyword;
+    public $upload_path;
+    public $uploadMediaObj;
+
+    public function __construct()
+    {
+        $this->upload_path = public_path() . '/upload/training/'; // Worked perfect
+        $this->uploadMediaObj = new UploadMedia();
+    }
 
 	public function getAllTraining()
 	{
@@ -72,9 +80,24 @@ class TrainingController extends BaseController {
 
 		Input::flash();
 		$data = Input::all();
-		// var_dump($data);exit;
+        $files = Input::file('training_upload');
+
+
+        /*
+        if( count($files) > 0)
+        {
+            foreach($files as $key => $file)
+            {
+                $file->move($this->upload_path, $file->getClientOriginalName());
+                $fullpath = $this->upload_path.$file->getClientOriginalName();
+                $upload_media[] = array('typeid'=>'1', 'fullpath'=>$fullpath);
+            }
+        }*/
+
+        //UploadMedia::insert($upload_media);
+
 		$rules = array(
-			'title' => array('required'), 
+			'title' => array('required'),
 			'description' => array('required'),
 			'sdt' => array('required'),
 			'edt' => array('required')
@@ -102,7 +125,7 @@ class TrainingController extends BaseController {
 		if ($validator->passes()) {
 			if(!$train_id){//from add page
 				if(count($data['role_id'] > 0))
-				{	
+				{
 					$role_str =implode(",", $data['role_id']);
 				}
 				$training = new Training();
@@ -120,15 +143,28 @@ class TrainingController extends BaseController {
 					$training->closed_date = $end_date;
 					$training->start_training_date = $start_date;
 					$training->save();
+
+                    $lastInsertId = $training->id;
+                    if( count($files) > 0)
+                    {
+                        foreach($files as $key => $file)
+                        {
+                            $file->move($this->upload_path, $file->getClientOriginalName());
+                            $fullpath = $this->upload_path.$file->getClientOriginalName();
+                            $upload_media[] = array('typeid'=>'1', 'fullpath'=>$fullpath,'training_id'=>$lastInsertId);
+                        }
+                     }
+
+                    UploadMedia::insert($upload_media);//save to media upload
 					return Redirect::to('/training')->with('success','บันทึกสำเร็จ');
 				}else
 				{
 					return Redirect::to('/training/add')->with('warning','มีชื่อหลัักสูตรนี้ในระบบแล้ว');
 				}
-				
+
 			}else{//from edit page
 				if(count($data['role_id'] > 0))
-				{	
+				{
 					$role_str =implode(",", $data['role_id']);
 				}
 				$training = new Training();
@@ -146,6 +182,20 @@ class TrainingController extends BaseController {
 					$training->closed_date = $end_date;
 					$training->start_training_date = $start_date;
 					$training->save();
+
+                    $lastInsertId = $training->id;
+                    if( count($files) > 0)
+                    {
+                        foreach($files as $key => $file)
+                        {
+                            $file->move($this->upload_path, $file->getClientOriginalName());
+                            $fullpath = $this->upload_path.$file->getClientOriginalName();
+                            $upload_media[] = array('typeid'=>'1', 'fullpath'=>$fullpath,'training_id'=>$lastInsertId);
+                        }
+                     }
+
+                    UploadMedia::insert($upload_media);//save to media upload
+
 					return Redirect::to('/training')->with('success','แก้ไขสำเร็จ');
 				// }else
 				// {
@@ -161,7 +211,7 @@ class TrainingController extends BaseController {
 			{
 				return Redirect::to('/training/edit/'.$train_id)->with('warning','กรุณากรอกข้อมูลตรงตามที่ระบบต้องการ');
 			}
-			
+
 		}
 	}
 
@@ -173,8 +223,11 @@ class TrainingController extends BaseController {
 	public function editTraining($train_id)
 	{
 		$roles = Roles::all();
+        $rs = Training::find($train_id);
+        $target_arr = explode(',',$rs->target);
 		return View::make('train.edit')
-					->with('result',Training::find($train_id))
+					->with('result',$rs)
+                    ->with('arr_target',$target_arr)
 					->with('roles',$roles);
 	}
 
@@ -207,10 +260,37 @@ class TrainingController extends BaseController {
 	public function getListUserTraining()
 	{
 		//var_dump(Training::all()->toArray());exit;
+        $att_file = self::downloadFileDetail(1);
 		$rs = Training::all();
 		// var_dump($rs->toArray());exit;
-		return View::make('train.trainlist')->with('results',$rs);
+		return View::make('train.trainlist')->with('results',$rs)->with('att_file',$att_file);
 	}
+
+    public function downloadFileDetail($id)
+    {
+        $all_attrachfile = UploadMedia::pathfile($id);
+        foreach ($all_attrachfile as $key => $path) {
+            $filename = substr(explode(',',basename($path))[0],0,-1);
+             $dw_path = '/pro'.explode("/pro",$path->fullpath)[1];
+            $paths[] = array( 'path'=>$dw_path,'filename'=>$filename,'training_id'=>$path->training_id);
+        }
+
+        return $paths;
+    }
+
+    public function downloadFile()
+    {
+        $path = Input::get('path');
+        $filename = basename($path);
+        $headers = array(
+            'Content-Type' => 'application/pdf',
+        );
+
+        /*$headers = array(
+              'Content-Type: application/pdf',
+            );*/
+        return Response::download($path,$filename, $headers);
+    }
 
 	/**
 	 * [getSaveUserTraining description]

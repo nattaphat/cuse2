@@ -14,6 +14,13 @@ class UsernhcController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
+
+    public $roleInfoObj;
+
+    public function  __construct()
+    {
+        $this->roleInfoObj = new UserRole();
+    }
 	public $usertype = array(
           	array('grp_id'=>'3','text'=>'ผู้ใช้งานทั่วไป'),
           	array('grp_id'=>'2','text'=>'ผู้ดูแลระบบ')
@@ -363,4 +370,10 @@ class UsernhcController extends BaseController {
 		    					));
 		}
 	}
+
+    public function getRole($role_id)
+    {
+        $rs = $this->roleInfoObj->getRoleInfo($role_id);
+        return View::make('userlist.roleinfo')->with('rs',$rs);
+    }
 }

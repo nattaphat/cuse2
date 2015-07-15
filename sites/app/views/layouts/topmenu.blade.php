@@ -120,7 +120,7 @@
                     <li><a href="{{ URL::to('training/course/report') }}"><i class="icon-fixed-width icon-tag"></i> ออกรายงาน-ชื่อหลักสูตร</a></li>
                 </ul>
             </li>
-
+            <li {{ (Request::is('other') ? 'class="active"' : '') }}><a href="{{ URL::to('other') }}" title="อื่นๆ"><i class="icon-list"></i> อื่นๆ</a></li>
         @endif
         </ul>
 
@@ -166,11 +166,13 @@
                         <li><a href="{{ URL::to('privacy') }}/{{ Auth::getUser()->id }}"><i class="icon-fixed-width icon-cogs"></i> ตั้งค่าไพรเวซี</a></li>
                         <li><a href="{{ URL::to('user/account/security') }}/{{ Auth::getUser()->id }}"><i class="icon-fixed-width icon-shield"></i> ตั้งค่าความมั่นคง</a></li>
                         <li><a href="{{ URL::to('user/account') }}/{{ Auth::getUser()->id }}"><i class="icon-fixed-width icon-pencil"></i> ข้อมูลบัญชี</a></li>
-                        
+                        <li><a href="{{ URL::to('user/account/role') }}/{{ Usernhc::getRoleName()->role_id }}"><i class="icon-fixed-width icon-legal"></i> เรียกดูสิทธิ</a></li>
+
                         <li class="divider"></li>
                         <li><a href="{{ URL::to('pbdia') }}"><i class="icon-fixed-width icon-beaker"></i> พีบีดีพีไอเอ</a></li>
                         <li><a href="{{ URL::to('help') }}"><i class="icon-fixed-width icon-question"></i> การใช้งานระบบ</a></li>
                         <li><a href="{{ URL::to('functional') }}"><i class="icon-fixed-width icon-question"></i> ฟังก์ชันงานในระบบ</a></li>
+                        <li><a href="{{ URL::to('glossary') }}"><i class="icon-fixed-width icon-info"></i> อภิธานศัพท์</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ URL::to('logout') }}"><i class="icon-fixed-width icon-signout"></i> ออกจากระบบ</a></li>
                     </ul>

@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       
-      <? $i=1; ?>
+      <?php $i=1; ?>
       @foreach ($agency_dataprivacy as $key => $agency)
           <tr>
             <td class="text-center col-md-1">

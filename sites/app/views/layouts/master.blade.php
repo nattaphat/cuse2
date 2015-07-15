@@ -15,6 +15,7 @@
 			
 			<!-- Bootstrap Datatables -->
 			<link href="{{ Config::get('nhc/site.asset_url') }}bootstrap3/css/bootstrap.css" rel="stylesheet">
+            <link href="{{ URL::asset('js/lib/bootstrap-fileinput/css/fileinput.min.css') }}" rel="stylesheet">
 
 			<!-- Datepicker: 
 				http://www.eyecon.ro/bootstrap-datepicker/ 
@@ -150,10 +151,13 @@
 			<!-- Bootstrap core JavaScript
 		    ================================================== -->
 		    <!-- Placed at the end of the document so the pages load faster -->
-		    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		    
+
+            <!-- File Input Uploader-->
+            <script src="{{ URL::asset('js/lib/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
+
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		    <script src="{{ Config::get('nhc/site.asset_url') }}bootstrap3/js/bootstrap.min.js"></script>
-		    
+
 		    <!-- 
 		    	Datepicker:
 				http://www.eyecon.ro/bootstrap-datepicker/

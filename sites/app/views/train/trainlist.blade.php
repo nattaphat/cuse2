@@ -49,6 +49,7 @@
         <th class="text-center">รายละเอียด</th>
         <th class="text-center">ประวัติการเข้าร่วม</th>
         <th class="text-center">สถานะหลักสูตร</th>
+        <th class="text-center">ไฟล์แนบ</th>
         <th class="text-center">วันที่สร้าง</th>
         <th class="text-center">วันสิ้นสุด</th>
         <th class="text-center">เข้าร่วม</th>
@@ -60,6 +61,7 @@
       
       
       <input type="hidden" name="userid" value="{{ Auth::getuser()->id }}">
+      <input type="hidden" name="training_dwroute" id="traing_dwroute" value="{{ URL::route('training_download') }}">
           <tr>
             <td class="col-md-2">{{ $result->title }}</td>
             <td class="col-md-2">{{ $result->description }}</td>
@@ -77,6 +79,17 @@
                   <font color='red'>ปิด</font>
                 @endif
             </td>
+              <td>
+                    @if( count($att_file) > 0)
+                        @foreach ($att_file as $key => $val)
+                            @if($val['training_id'] == $result->id)
+                                <a href="{{$val['path']}}" id="training_download">{{$val['filename']}}</a> </br>
+                            @endif
+                        @endforeach
+                    @else
+                        N/A
+                    @endif
+              </td>
             <td class="col-md-2 text-center">
               {{ Carbon::createFromTimeStamp(strtotime($result->created_at))->format('Y-m-d') }}
             </td>

@@ -85,4 +85,8 @@ class Training extends Eloquent {
 		return $rs;
 	}
 
+    public function getLatestId()
+    {
+
+    }
 }

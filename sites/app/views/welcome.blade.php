@@ -58,7 +58,7 @@
                                 <td class="text-center col-md-1">
                                  <input type="hidden" id="policyduty_userinfo" value="{{URL::to('/policyduty/userinfo/')}}/{{$policy->policy_duty}}">
                                   <a data-toggle="modal" href="#myModal" id="{{$policy->policy_duty}}" class="dutylist">
-                                  <?
+                                  <?php
                                     $rs = PolicyDuty::find($policy->policy_duty);
                                     echo $rs['fname'];
                                   ?>

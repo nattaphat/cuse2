@@ -24,4 +24,9 @@ class HelpController extends BaseController {
         return View::make('help.functional');
 	}
 
+    public function glossary()
+    {
+        return View::make('help.glossary');
+    }
+
 }

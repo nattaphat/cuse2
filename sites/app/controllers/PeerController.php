@@ -94,7 +94,7 @@ class PeerController extends BaseController {
 		//$rs = Agency::getAgency($agency_id);
 		$agency_data = new AgencyData;
 		$rs = $agency_data->getAgenyByDataId($data_id);
-		//var_dump($rs);exit;
+//		var_dump($rs);exit;
 		return View::make('peer.ajax_datalist')->with('result',$rs);
 	}
 

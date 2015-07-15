@@ -17,7 +17,8 @@
   "route" => array("trining_save",$result->id),
   "id"=>"form-training-adding",
   "autocomplete" => "off",
-  "class"=>"form-horizontal"
+  "class"=>"form-horizontal",
+  "files"=>true
 ])}}
     
   <div class="form-group">
@@ -52,10 +53,7 @@
       <div class="col-lg-offset-4 col-lg-8">
       <div class="checkbox">
         <label class="checkbox">
-        <?
-          $target_arr = explode(',',$result->target);
-        ?>
-          {{ Form::checkbox('role_id[]', $val->id, (in_array($val->id, $target_arr)) ) }} {{$val->role_name}} 
+          {{ Form::checkbox('role_id[]', $val->id, (in_array($val->id, $arr_target)) ) }} {{$val->role_name}}
         </label>      
       </div>
       </div>
@@ -78,7 +76,16 @@
 
     </div>
   </div>
+<div class="form-group">
+        <label for="inputPassword1" class="col-lg-4 control-label">เอกสารแนบ</label>
+        <div class=" col-lg-8">
+            {{
+            Form::file('training_upload[]',["multiple"=>"true","id"=>"training_upload"]);
+            }}
+            {{--<input id="training_upload" type="file" multiple="true">--}}
 
+        </div>
+ </div>
   <div class="form-group">
       <label for="inputEmail1" class="col-lg-4 control-label">ระยะเวลา ตั้งแต่-ถึง*</label>
       <div class="col-lg-3">
@@ -89,6 +96,7 @@
       </div>
 
     </div>
+
 <div class="modal-footer">
       <button type="submit" class="btn btn-primary save-policy" >บันทึก</button>
       <a href="{{ URL::to('/training/del' ) }}/{{ $result->id }}" class="btn btn-danger" onclick="return confirm('ท่านต้องการลบหลักสูตรอบรมนี้ใช่หรือไม่ ?')">ลบทิ้ง</a>

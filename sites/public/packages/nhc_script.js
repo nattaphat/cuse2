@@ -905,7 +905,35 @@ $(document).ready(function()
          });// end $.ajax
         });//end .nav-list a
 
+      //Function do search on data
+        $("#training_download").click(function(event){
+         event.preventDefault();
+        var url = $('#traing_dwroute').val();
+        var path_download = $(this).attr('href');
+        console.log(path_download)
+            window.open(path_download,'_blank');
+         //window.location.href = path_download;
+        //$.ajax({
+        //   type: 'POST',
+        //   url: url,//"{{{ URL::to('content-policy' ) }}}",
+        //    data: ({path : path_download}),
+        //   dataType: "html",
+        //   success: function(data) {
+        //       console.log(data)
+        //     //$("#result_agency_data").empty().html(data);
+        //   },
+        //   error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //     alert('Error occured!, ' + XMLHttpRequest);
+        //   }
+        // });// end $.ajax
+        });//end .nav-list a
 
+
+        $("#training_upload").fileinput({
+            "allowedFileExtensions":["pdf"],
+            "maxFileSize":10240,//10MB
+            "maxFileCount":5
+        });
         // $(".btn_add_agency_data").click(function(event){
         //  event.preventDefault();
         // var str = $( "#add_agency_data" ).serialize();
