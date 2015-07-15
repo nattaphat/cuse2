@@ -9,4 +9,8 @@
 class OtherController extends BaseController
 {
 
+    public function checklist()
+    {
+        return View::make('other.other');
+    }
 }
