@@ -9,7 +9,7 @@
     </div>
 
     <ol class="breadcrumb">
-        <li><a href="{{ URL::to('admin') }}">หน้าหลัก</a></li>
+        <li><a href="{{ URL::to('other') }}">เอกสารเผยแพร่</a></li>
         <li class="active">อัพเอกสารเผยแพร่คลังสารสนเทศกลาง</li>
     </ol>
     <div class="col-lg-12">
@@ -62,10 +62,9 @@
                 </tbody>
             </table>
             {{ Form::close() }}
-
             <br />
             <!-- Document list -->
-            @if (count($alldoc) > 0)
+            @if (count($alldoc) > 0 )
             <table id="result_search_policy"  class="table table-hover table-bordered">
                 <thead>
                 <tr class="active">
@@ -76,25 +75,29 @@
                 </thead>
                 <tbody>
                 @foreach ($alldoc as $key => $val)
+                    @if($typeid == $val->typeid)
                 <tr >
                     <td class="col-md-5 text-left">
                         {{$val->description}}
                     </td>
                     <td class="col-md-5 text-left">
-                        {{basename($val->fullpath)}}
+                        {{$val->fullpath}}
                     </td>
                     <td class="col-md-2 text-center">
                         <input type="hidden" id="docpath" name="docpath" value="{{$val->fullpath}}">
                         <input type="checkbox" id="doc_status" name="doc_status" @if($val->document_status) checked @endif>
                     </td>
                 </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>
             <br />
-            <a href="{{ URL::route('proac_commmitupload_edit') }}" class="btn btn-info docstatus_edit">
-                บันทึก
-            </a>
+                @if($typeid == $val->typeid)
+                    <a href="{{ URL::route('proac_commmitupload_edit') }}" class="btn btn-info docstatus_edit">
+                        บันทึก
+                   </a>
+                @endif
             @endif
         </div>
 

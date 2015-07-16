@@ -922,7 +922,7 @@ $(document).ready(function()
         });
 
 
-      $("#proactive_commitment").fileinput({
+      $("#proactive_commitment,#proactive_secretdocument,#proactive_termsharing,#proactive_schedule_review_policy,#proactive_proj_technology_doc,#proactive_privacy_assessment_std,#proactive_report_compliance_policy,#proactive_privacy_security_audit,#privacyembeded_public_purpose,#privacyembeded_purpose_assessment,#privacyembeded_technology_design,#positivesum_thirdparty_term,#positivesum_index_purp,#end2end_riskassment,#usertransparency_privacy_adv,#usertransparency_data_accurency,#usertransparency_user_expected").fileinput({
           "allowedFileExtensions":["pdf","txt"],
           "maxFileSize":10240,//10MB
           "maxFileCount":1,
@@ -930,6 +930,7 @@ $(document).ready(function()
           //"uploadUrl": "http://localhost/file-upload-single/1", // server upload action
           //"uploadAsync": true
       });
+
 
           function disableUpload(id_chk,id_upload){
               $("."+id_upload).addClass('disabled');
@@ -942,7 +943,7 @@ $(document).ready(function()
               });
           }
 
-          disableUpload("chkbx_proactive_commitment","cls_proactive_commitment");
+          //disableUpload("chkbx_proactive_commitment","cls_proactive_commitment");
 
 
           $(".docstatus_edit").click(function(event){

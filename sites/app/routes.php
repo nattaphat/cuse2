@@ -1024,6 +1024,20 @@ Route::get('publicdoc', array(
     'uses' => 'OtherController@publicdoc'
 ));
 
+//add chk list frm
+Route::get('chklist-add', array(
+    'before'=>'auth_superadmin',
+    'as' => 'chklist_add',
+    'uses' => 'OtherController@addChkFrm'
+));
+
+//save chk list
+Route::post('chklist-save', array(
+    'before'=>'auth_superadmin',
+    'as' => 'chklist_save',
+    'uses' => 'OtherController@saveChkList'
+));
+
 //PDF Example download
 Route::get('/pdf/download', function()
 {

@@ -22,6 +22,10 @@
                           {{--อธิบายคำศัพท์ นิยามคำ ที่ใช้งานในคลังสารสนเทศกลาง--}}
                         </p>
                       </div>
+                    <div class="col-md-12 padding-top text-right">
+                         <a href="{{ URL::to('chklist-add' ) }}" class="btn btn-success btn">เพิ่มรายการเอกสาร</a>
+                    </div>
+                    <br/>
                       <!-- Table -->
                       <table id="result_search_policy"  class="table table-hover table-bordered">
                         <thead>
@@ -31,14 +35,15 @@
                             <th class="text-center">อัพโหลดไฟล์เอกสาร</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody> <?php $i=1; ?>
                             @foreach( $rs as $key => $val)
                               <tr >
                                 <td class="col-md-1 text-center">
-                                    <input type="checkbox" class="" id="chkbx_{{$val->eng_name}}" name="chkbx_{{$val->eng_name}}">
+                                    {{--<input type="checkbox" class="" id="chkbx_{{$val->eng_name}}" name="chkbx_{{$val->eng_name}}">--}}
+                                    {{ $i++; }}
                                 </td>
                                 <td class="col-md-5 text-left">
-                                    ความมุ่งมั่นที่แสดงให้เห็นว่าได้รับความร่วมมือจากกลุ่มผู้ใช้งานและมีส่วนได้เสีย
+                                   {{$val->name}}
                                 </td>
                                 <td class="col-md-6 text-center">
                                     <a href="{{ URL::route('proac_commmitupload') }}/{{$val->id}}" class="btn btn-info cls_{{$val->eng_name}}">
