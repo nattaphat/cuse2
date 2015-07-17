@@ -102,6 +102,17 @@
         ]) }}
     </div>
   </div>
+
+    <div class="form-group">
+    <label for="inputPassword1" class="col-lg-2 control-label"></label>
+    <div class="col-lg-4">
+        <div class="checkbox">
+        <label>
+            <input type="checkbox"> <a href="">ยอมรับข้อตกลงการใช้งาน</a>
+        </label>
+    </div>
+    </div>
+  </div>
   <div class="form-group">
       <div class="controls col-lg-offset-3 form-inline">
           <button type="submit" class="btn btn-primary">ลงทะเบียน</button>
